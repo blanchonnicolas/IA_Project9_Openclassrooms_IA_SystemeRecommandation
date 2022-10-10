@@ -80,23 +80,22 @@ def compute_metrics_map_hitcount(y_true, y_pred, k=5):
 user_id_serie = df_clicks_metadata_test['user_id'].unique()
 k=5
 
-# COMPLEX RATING : Calculate ratio of the number of clicks per users in unique session, considering word_count and session_size,
-def ratio_clicks_wordscount_per_article_session(df_clicks_metadata):
+ # MEDIUM RATING : Calculate number of click per article, per user on single session, per article
+def ratio_clicks_session_size_per_article_session(df_clicks_metadata):
     serie_clicks_ratings_per_session = df_clicks_metadata[['user_id', 'article_id', 'session_id', 'session_size_discretized']].groupby(['user_id', 'article_id', 'session_id']).size()
     serie_session_size = df_clicks_metadata[['user_id', 'article_id', 'session_id', 'session_size_discretized']].groupby(['user_id', 'article_id', 'session_id']).sum()
-    serie_words_count = df_clicks_metadata[['user_id', 'article_id', 'session_id', 'words_count_normalized']].groupby(['user_id', 'article_id', 'session_id']).sum()
-    df_ratio_clicks_wordscount_per_article_session= pd.concat([serie_clicks_ratings_per_session, serie_session_size, serie_words_count], axis=1).reset_index()
-    df_ratio_clicks_wordscount_per_article_session.rename(columns={0: 'clicks_hits'}, inplace = True)
-    df_ratio_clicks_wordscount_per_article_session['rating'] = df_ratio_clicks_wordscount_per_article_session['session_size_discretized'] / (df_ratio_clicks_wordscount_per_article_session['clicks_hits'] *  df_ratio_clicks_wordscount_per_article_session['words_count_normalized'])
-    return df_ratio_clicks_wordscount_per_article_session
+    df_ratio_clicks_session_size_over_article_clicks= pd.concat([serie_clicks_ratings_per_session, serie_session_size], axis=1).reset_index()
+    df_ratio_clicks_session_size_over_article_clicks.rename(columns={0: 'clicks_hits'}, inplace = True)
+    df_ratio_clicks_session_size_over_article_clicks['rating'] = df_ratio_clicks_session_size_over_article_clicks['session_size_discretized'] / df_ratio_clicks_session_size_over_article_clicks['clicks_hits']
+    return df_ratio_clicks_session_size_over_article_clicks
+    
+df_ratio_clicks_session_size_over_article_clicks_session_train = ratio_clicks_session_size_per_article_session(df_clicks_metadata_train)
+df_ratio_clicks_session_size_over_article_clicks_session_test = ratio_clicks_session_size_per_article_session(df_clicks_metadata_test)
 
-df_ratio_clicks_wordscount_per_article_session_train = ratio_clicks_wordscount_per_article_session(df_clicks_metadata_train)
-df_ratio_clicks_wordscount_per_article_session_test = ratio_clicks_wordscount_per_article_session(df_clicks_metadata_test)
 
-
-sparse_user_item = scipy.sparse.csr_matrix((df_ratio_clicks_wordscount_per_article_session_train['rating'].astype(float),
-                                                 (df_ratio_clicks_wordscount_per_article_session_train['user_id'], 
-                                                 df_ratio_clicks_wordscount_per_article_session_train['article_id'])))
+sparse_user_item = scipy.sparse.csr_matrix((df_ratio_clicks_session_size_over_article_clicks_session_train['rating'].astype(float),
+                                                 (df_ratio_clicks_session_size_over_article_clicks_session_train['user_id'], 
+                                                 df_ratio_clicks_session_size_over_article_clicks_session_train['article_id'])))
 
 # Boucle for sur la liste des User_Id_Test, et mesure Top_k_accuracy, en utilisant les Embbeding réduit
 score_serie = []
@@ -107,7 +106,7 @@ y_pred_serie = []
 y_true_serie = []
 # Boucle for sur la liste des User_Id_Test, et mesure Top_k_accuracy, en utilisant les Embbeding réduit
 for user in user_id_serie: #df_clicks_metadata_test['user_id'].unique()
-    recommendations = model_complex.recommend(user, sparse_user_item[user], N=5)
+    recommendations = model_medium.recommend(user, sparse_user_item[user], N=5)
     y_pred = recommendations[0].tolist()
     y_true = df_clicks_metadata_test.loc[df_clicks_metadata_test['user_id'] == user, 'click_article_id'].tolist()
     average_precision_k, hit_count = compute_metrics_map_hitcount(y_true, y_pred, k)
@@ -128,4 +127,4 @@ results_modelbased['y_true_serie'] = y_true_serie
 
 Mean_Average_Precision_at_k = results_modelbased['average_precision'].mean() #np.mean([average_precision_k(y_true, y_pred, k=5) for y_true, y_pred in zip(y_true_serie, y_pred_serie)])
 print(f"Mean_Average_Precision_at_k is = {Mean_Average_Precision_at_k}")
-results_modelbased.to_csv(os.path.join(data_path, "results_modelbased_ALS_complex_full.csv"))
+results_modelbased.to_csv(os.path.join(data_path, "results_modelbased_ALS_medium_normalized.csv"))

@@ -76,7 +76,7 @@ y_true_lenght_serie = []
 y_pred_serie = []
 y_true_serie = []
 for user in user_id_serie: #df_clicks_metadata_test['user_id'].unique()
-    y_pred = recommended_top5_contentbased(array_articles_embeddings, user, df_clicks_metadata_train).tolist() #array_articles_embeddings_centré_réduit
+    y_pred = recommended_top5_contentbased(array_articles_embeddings_centré_réduit, user, df_clicks_metadata_train).tolist() #array_articles_embeddings_centré_réduit
     y_true = df_clicks_metadata_test.loc[df_clicks_metadata_test['user_id'] == user, 'click_article_id'].tolist()
     average_precision_k, hit_count = compute_metrics_map_hitcount(y_true, y_pred, k)
     # Append user recommendantions result in list
@@ -93,13 +93,6 @@ results_contentbased['y_true_lenght_serie'] = y_true_lenght_serie
 results_contentbased['y_pred_serie'] = y_pred_serie
 results_contentbased['y_true_serie'] = y_true_serie
 
-# array_results_contentbased = np.empty((0,6), dtype=object)
-# for user in user_id_serie: #df_clicks_metadata_test['user_id'].unique()
-#     y_pred = recommended_top5_contentbased(array_articles_embeddings_centré_réduit, user, df_clicks_metadata_train).tolist() #array_articles_embeddings_centré_réduit
-#     y_true = df_clicks_metadata_test.loc[df_clicks_metadata_test['user_id'] == user, 'click_article_id'].tolist()
-#     average_precision_k, hit_count = compute_metrics_map_hitcount(y_true, y_pred, k)
-#     # Append user recommendantions result in list
-#     array_results_contentbased = np.append(array_results_contentbased, np.array([[user, hit_count, average_precision_k, len(y_true), np.array(y_pred, dtype=object), np.array(y_true, dtype=object)]]), axis=0)
-# results_contentbased = pd.DataFrame(array_results_contentbased, columns=['user_id', 'hit_count', 'average_precision', 'y_true_lenght', 'y_pred', 'y_true'])
-
+Mean_Average_Precision_at_k = results_contentbased['average_precision'].mean() #np.mean([average_precision_k(y_true, y_pred, k=5) for y_true, y_pred in zip(y_true_serie, y_pred_serie)])
+print(f"Mean_Average_Precision_at_k is = {Mean_Average_Precision_at_k}")
 results_contentbased.to_csv(os.path.join(data_path, "results_contentbased_embedding_full.csv"))
