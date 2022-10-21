@@ -23,8 +23,21 @@ For application access:
 
 This repository is part of a 3-repos project :
 - Main repo : [Notebooks and Scripts](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandationp) 
-- [Azure Function](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/azure_function "Azure Function") : **this repo**
-- [Mobile App](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/streamlit "Mobile App")
+- [Azure Function](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/azure_function "Azure Function") : **this repo**
+- [Mobile App](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/streamlit "Mobile App")
 
+## Azure Function Repo content
+-   [Article_Reco_http_request - folder](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/azure_function/Article_Reco_http_request)
+    - [init.py](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/azure_function/Article_Reco_http_request/__init__.py): Script containing azure function, allowing to deal with http parameter value.
+    - [function.json](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/azure_function/Article_Reco_http_request/function.json) : File describing bindings and function triggered by HTTP request.
+    - [sample.dat](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/azure_function/Article_Reco_http_request/sample.dat)
+
+-   [data - folder](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/azure_function/data)
+     - SparseMatrix in npz format
+     - Implicit ALS Model trained through main repo script "[Train Collaborative Filtering model - script](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/train_CF_model.py)
+
+-   [host.json](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/azure_function/host.json) : Contains configuration options that affect all functions in a function app instance.
+
+-   [Requirements.txt](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/azure_function/requirements.txt) : Contains the list of Python packages that the system installs when publishing to Azure.
 
 

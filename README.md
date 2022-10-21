@@ -23,8 +23,8 @@ For application access:
 
 This repository is part of a 3-repos project :
 - Main repo : [Notebooks and Scripts](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandationp) : **this repo**
-- [Azure Function](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/azure_function "Azure Function")
-- [Mobile App](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/streamlit "Mobile App")
+- [Azure Function](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/azure_function "Azure Function")
+- [Mobile App](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/tree/main/streamlit "Mobile App")
 
 
 ## More details here :
@@ -36,7 +36,7 @@ This repository is part of a 3-repos project :
 -   [Vidéo]()
 
 ## Main Repo content
--   [Notebook 1 : datagenerator](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/P9_01_notebook.ipynbn)
+-   [Notebook 1 : datagenerator](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/P9_01_notebook.ipynb)
     - Data Analysis: Visualisation, Modification 
 	- Unit Test
 
