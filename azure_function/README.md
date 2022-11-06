@@ -13,7 +13,7 @@ Our role is to participate to the conception and development of the recommender 
 
 The project is using below dataset to train recommender systems: [My Content dataset](https://www.kaggle.com/gspmoreira/news-portal-user-interactions-by-globocom#clicks_sample.csv).
 
-Finally, recommender system engine is callable using : [Azure function called with user_id 72 - Http trigger](https://iap9openclassrooms.azurewebsites.net/api/article_reco_http_request?user_id=72)
+Finally, recommender system engine is callable using : [Azure function called with user_id 72 - Http trigger](https://iap9openclassrooms.azurewebsites.net/api/article_reco_http_request?user_id=72) : Disable
 
 ## How to use
 For Setup:

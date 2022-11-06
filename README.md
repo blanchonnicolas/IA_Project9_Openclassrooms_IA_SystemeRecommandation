@@ -29,11 +29,11 @@ This repository is part of a 3-repos project :
 
 ## More details here :
 
--   [Presentation](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation)
+-   [Presentation](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/p9_03_presentation.pdf)
 
--   [Technical Note](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation)
+-   [Streamlit App](https://blanchonnicolas-ia-project9-ope-streamlitp9-01-streamlit-ow67mu.streamlit.app/) : Disabled
 
--   [Vidéo]()
+-   [Vidéo](https://youtu.be/5K1mIxteeSs)
 
 ## Main Repo content
 -   [Notebook 1 : datagenerator](https://github.com/blanchonnicolas/IA_Project9_Openclassrooms_IA_SystemeRecommandation/blob/main/P9_01_notebook.ipynb)
